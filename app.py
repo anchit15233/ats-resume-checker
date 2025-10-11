@@ -9,27 +9,37 @@ from helper_functions import (
     grammar_check_score
 )
 
+# -------------------------------
+# ⚙️ App Configuration
+# -------------------------------
 st.set_page_config(page_title="ATS Resume Checker", layout="wide")
 
 # -------------------------------
-# 🎯 App Title and Description
+# 💬 Sidebar
+# -------------------------------
+with st.sidebar:
+    st.title("ℹ️ About")
+    st.info(
+        "This ATS Resume Checker compares your resume with a job description "
+        "and provides insights on keyword match, formatting, and readability."
+    )
+    st.markdown("---")
+    st.markdown("**Built by Anchit Sharma**")
+
+# -------------------------------
+# 🏁 Title & Description
 # -------------------------------
 st.title("📄 ATS Resume Checker")
-st.markdown(
-    """
-    Upload your resume and paste a job description to see how well your resume matches the role.  
-    Get keyword insights, formatting feedback, and grammar score instantly!
-    """
-)
+st.markdown("---")
+st.markdown("### 🚀 Check your resume compatibility with any job description instantly!")
 
 # -------------------------------
 # 🧾 Inputs
 # -------------------------------
-uploaded_file = st.file_uploader("Upload your Resume", type=["pdf", "docx"])
-job_description = st.text_area("Paste the Job Description Here", height=200)
+uploaded_file = st.file_uploader("📂 Upload your Resume", type=["pdf", "docx"])
+job_description = st.text_area("💼 Paste the Job Description Here", height=200)
 
 if uploaded_file and job_description:
-    # Extract text based on file type
     file_name = uploaded_file.name.lower()
     if file_name.endswith(".pdf"):
         resume_text = extract_text_from_pdf(uploaded_file)
@@ -39,7 +49,7 @@ if uploaded_file and job_description:
         st.error("Unsupported file type. Please upload a PDF or DOCX.")
         st.stop()
 
-    # Clean and process text
+    # Clean text
     clean_resume = clean_text(resume_text)
     clean_jd = clean_text(job_description)
 
@@ -53,24 +63,37 @@ if uploaded_file and job_description:
     word_count = len(resume_text.split())
 
     # -------------------------------
-    # 📊 Display Results
+    # 📊 Results Section
     # -------------------------------
-    st.subheader("📊 ATS Match Results")
-    st.metric(label="ATS Match Score", value=f"{match_score}%")
-    st.metric(label="Formatting Score", value=f"{format_score}%")
-    st.metric(label="Grammar / Readability Score", value=f"{grammar_score}%")
-    st.metric(label="Word Count", value=word_count)
+    st.markdown("---")
+    st.markdown("## 📊 ATS Match Results")
+
+    st.write(f"**ATS Match Score:** {match_score}%")
+    st.progress(int(match_score))
+
+    st.write(f"**Formatting Score:** {format_score}%")
+    st.progress(int(format_score))
+
+    st.write(f"**Grammar / Readability Score:** {grammar_score}%")
+    st.progress(int(grammar_score))
+
+    st.write(f"**Word Count:** {word_count}")
 
     # -------------------------------
-    # 💡 Feedback Sections
+    # 🧠 Missing Keywords
     # -------------------------------
-    st.subheader("🧠 Missing Keywords")
+    st.markdown("---")
+    st.markdown("## 🧠 Missing Keywords")
     if missing_keywords:
         st.warning(", ".join(missing_keywords))
     else:
         st.success("All key terms from the job description seem to be covered!")
 
-    st.subheader("🧩 Formatting Feedback")
+    # -------------------------------
+    # 🧩 Formatting Feedback
+    # -------------------------------
+    st.markdown("---")
+    st.markdown("## 🧩 Formatting Feedback")
     if format_feedback:
         for tip in format_feedback:
             st.info(f"• {tip}")
@@ -78,15 +101,17 @@ if uploaded_file and job_description:
         st.success("Good formatting! Key sections found.")
 
     # -------------------------------
-    # 🎯 Final Interpretation
+    # ✅ Summary
     # -------------------------------
-    st.subheader("✅ Summary")
+    st.markdown("---")
+    st.markdown("## ✅ Summary")
     if match_score > 70:
         st.success("Strong match! Your resume aligns well with this job description.")
     elif match_score > 40:
         st.warning("Moderate match — consider adding more role-specific keywords.")
     else:
         st.error("Low match. Try tailoring your resume for this specific role.")
+
 else:
-    st.info("Please upload your resume and paste a job description to begin.")
+    st.info("👆 Please upload your resume and paste a job description to begin.")
 
