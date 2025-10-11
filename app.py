@@ -23,8 +23,7 @@ with st.sidebar:
         "This ATS Resume Checker compares your resume with a job description "
         "and provides insights on keyword match, formatting, and readability."
     )
-    st.markdown("---")
-    st.markdown("**Built by Anchit Sharma**")
+    
 
 # -------------------------------
 # 🏁 Title & Description
