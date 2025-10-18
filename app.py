@@ -103,7 +103,7 @@ if uploaded_file and job_description:
 
     # Recommendation
     st.markdown("---")
-    st.markdown("### ✅ High-level Recommendation")
+    st.markdown("### ✅Recommendation")
     if match_score > 70:
         st.success("Strong match! Your resume aligns well with this job description.")
     elif match_score > 40:
