@@ -132,11 +132,9 @@ if uploaded_file and job_description:
         st.write(", ".join(soft))
     else:
         st.success("Soft skills covered.")
-
-  # Remove Domain/Other Keywords section and add summary line
+# Remove Domain/Other Keywords section and add summary line
 st.markdown("🧩 No major domain-specific gaps detected.")
-
-    # -------------------------------
+  # -------------------------------
     # 🧾 Section Breakdown (visual checklist)
     # -------------------------------
     st.markdown("---")
