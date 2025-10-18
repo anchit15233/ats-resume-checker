@@ -1,25 +1,27 @@
-# 📄 ATS Resume Checker
+📄 ATS Resume Checker
 
-A simple **ATS Resume Checker** built with **Python** and **Streamlit**.  
-Upload your resume and paste a job description to see how well your resume matches the role.
+A Streamlit app that checks how well your resume matches a job description.
+It analyzes ATS score, highlights missing skills, checks key sections, and shows visual insights.
 
----
+🌐 Live Use
 
-## 🚀 Features
-- Upload **PDF or DOCX** resume  
-- Paste **Job Description**  
-- Get **ATS Match Score (%)**  
-- See **Missing Keywords**  
-- Basic **Formatting & Grammar Check**
+Simply open the app on Streamlit Cloud and upload your resume with a job description — no setup or installation needed.
 
----
+✨ Features
 
-## 🛠️ Tech Stack
-- Python  
-- Streamlit  
-- PyPDF2, python-docx  
-- Scikit-learn (TF-IDF + Cosine Similarity)  
-- NLTK, FuzzyWuzzy  
+ATS Match & Keyword Coverage
 
----
+Skill Gap (Technical / Soft / Domain)
 
+Section Check & Visual Dashboard
+
+🔧 Tech
+Frontend: Streamlit
+
+Language: Python
+
+Text Processing: NLTK, scikit-learn (TF-IDF)
+
+File Handling: PyPDF2, python-docx
+
+Visualization: Matplotlib, WordCloud
