@@ -30,7 +30,7 @@ with st.sidebar:
     st.info(
         "This ATS Resume Checker compares your resume with a job description "
         "and provides insights on keyword match, formatting, and readability.\n\n"
-        "Phase-2: Skill gap categorization, visual dashboard, and section breakdown (free)."
+        
     )
     st.markdown("---")
     st.caption("Pro features (future): AI rewrite, course suggestions, personal dashboard")
