@@ -29,10 +29,8 @@ with st.sidebar:
     st.title("ℹ️ About")
     st.info(
         "This ATS Resume Checker compares your resume with a job description "
-        "and provides insights on keyword match, formatting, and readability.\n\n"
-        
+        "and provides insights on keyword match, formatting, and readability."
     )
-    
 
 # -------------------------------
 # 🏁 Title & Description
@@ -108,7 +106,7 @@ if uploaded_file and job_description:
         st.write(f"**Words:** {word_count}")
         st.write(f"**Keyword Coverage:** {coverage_pct:.1f}%")
 
-    # High-level recommendation
+    # Recommendation
     st.markdown("---")
     st.markdown("### ✅ High-level Recommendation")
     if match_score > 70:
@@ -153,10 +151,8 @@ if uploaded_file and job_description:
     st.markdown("## 🧾 Resume Section Breakdown")
     cols = st.columns(3)
     keys = ["summary", "experience", "projects", "education", "skills", "certifications"]
-    icons = {
-        True: "✅",
-        False: "⚠️"
-    }
+    icons = {True: "✅", False: "⚠️"}
+
     for i, k in enumerate(keys):
         col = cols[i % 3]
         found = sections_found.get(k, False)
@@ -200,16 +196,17 @@ if uploaded_file and job_description:
     ax2.set_title("JD Keyword Coverage")
     st.pyplot(fig2)
 
-    # Wordclouds side-by-side
+    # Wordclouds side-by-side (✅ fixed for deprecation)
     wc_col1, wc_col2 = st.columns(2)
     with wc_col1:
         st.subheader("Resume — Top Words")
         img_res = generate_wordcloud_image(resume_top)
-        st.image(img_res, use_column_width=True)
+        st.image(img_res, use_container_width=True)
+
     with wc_col2:
         st.subheader("Job Description — Top Words")
         img_jd = generate_wordcloud_image(jd_top)
-        st.image(img_jd, use_column_width=True)
+        st.image(img_jd, use_container_width=True)
 
     # -------------------------------
     # ✅ Summary
@@ -222,4 +219,5 @@ if uploaded_file and job_description:
 
 else:
     st.info("👆 Please upload your resume and paste a job description to begin.")
+
 
