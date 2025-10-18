@@ -165,28 +165,53 @@ if uploaded_file and job_description:
     st.markdown("---")
     st.markdown("## 📈 Visual Insights")
 
-    # Bar chart for three scores
-    fig1, ax1 = plt.subplots(figsize=(6, 3))
-    scores = [match_score, format_score, grammar_score]
-    labels = ["Match", "Formatting", "Grammar"]
-    bar_colors = ["#2b8cbe", "#7fc97f", "#fdae61"]
-    ax1.bar(labels, scores, color=bar_colors)
-    ax1.set_ylim(0, 100)
-    ax1.set_ylabel("Score (%)")
-    ax1.set_title("Overall Scores")
-    for i, v in enumerate(scores):
-        ax1.text(i, v + 1, f"{v}%", ha='center')
-    st.pyplot(fig1)
+    # Improved interactive bar chart for Overall Scores
+import plotly.graph_objects as go
 
-    # Pie chart for keyword coverage
-    fig2, ax2 = plt.subplots(figsize=(5, 3))
-    cover = coverage_pct
-    remaining = max(0, 100 - cover)
-    ax2.pie([cover, remaining],
-            labels=[f"Covered {cover:.1f}%", f"Missing {remaining:.1f}%"],
-            autopct='%1.1f%%', colors=["#2b8cbe", "#e0e0e0"])
-    ax2.set_title("JD Keyword Coverage")
-    st.pyplot(fig2)
+scores = [match_score, format_score, grammar_score]
+labels = ["ATS Match", "Formatting", "Grammar"]
+
+fig_bar = go.Figure(data=[
+    go.Bar(
+        x=labels,
+        y=scores,
+        marker_color=["#2b8cbe", "#7fc97f", "#fdae61"],
+        text=[f"{s:.1f}%" for s in scores],
+        textposition="auto"
+    )
+])
+
+fig_bar.update_layout(
+    title="📊 Overall ATS Performance",
+    yaxis_title="Score (%)",
+    yaxis_range=[0, 100],
+    template="simple_white",
+    title_font=dict(size=18, color="#333", family="Arial"),
+    plot_bgcolor="rgba(0,0,0,0)"
+)
+
+st.plotly_chart(fig_bar, use_container_width=True)
+
+# Modern donut-style chart for JD Keyword Coverage
+cover = coverage_pct
+remaining = max(0, 100 - cover)
+
+fig_pie = go.Figure(data=[go.Pie(
+    values=[cover, remaining],
+    labels=["Covered", "Missing"],
+    marker_colors=["#2b8cbe", "#e0e0e0"],
+    hole=0.6,
+    textinfo="none"
+)])
+
+fig_pie.update_layout(
+    title="🧩 JD Keyword Coverage",
+    annotations=[dict(text=f"{cover:.1f}%", x=0.5, y=0.5, font_size=20, showarrow=False)],
+    showlegend=True,
+    template="simple_white"
+)
+
+st.plotly_chart(fig_pie, use_container_width=True)
 
     # -------------------------------
     # ✅ Summary
