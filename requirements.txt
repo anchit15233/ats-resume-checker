@@ -3,7 +3,9 @@ PyPDF2
 python-docx
 scikit-learn
 nltk
-spacy
+matplotlib
+wordcloud
+pillow
 fuzzywuzzy
-python-Levenshtein
+
 
