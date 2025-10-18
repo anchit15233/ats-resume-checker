@@ -133,11 +133,8 @@ if uploaded_file and job_description:
     else:
         st.success("Soft skills covered.")
 
-    st.markdown("### 🏢 Domain / Other Keywords")
-    if domain:
-        st.write(", ".join(domain))
-    else:
-        st.success("Domain keywords covered or none missing.")
+  # Remove Domain/Other Keywords section and add summary line
+st.markdown("🧩 No major domain-specific gaps detected.")
 
     # -------------------------------
     # 🧾 Section Breakdown (visual checklist)
