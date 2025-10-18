@@ -34,7 +34,7 @@ with st.sidebar:
 # -------------------------------
 # 🏁 Title & Description
 # -------------------------------
-st.title("📄 ATS Resume Checker — Professional Dashboard")
+st.title("📄 ATS Resume Checker")
 st.markdown("---")
 st.markdown("### 🚀 Paste a Job Description and upload a Resume (PDF / DOCX) to get an ATS-ready analysis")
 
