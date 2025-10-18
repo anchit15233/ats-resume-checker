@@ -112,7 +112,7 @@ if uploaded_file and job_description:
         st.error("Low match. Tailor your resume for this role and add missing skills or sections.")
 
     # -------------------------------
-    # 🧩 Missing Keywords — categorized
+    # 🧠 Missing Keywords — categorized
     # -------------------------------
     st.markdown("---")
     st.markdown("## 🧠 Missing Keywords (Skill Gap)")
@@ -212,7 +212,7 @@ if uploaded_file and job_description:
     st.plotly_chart(fig_pie, use_container_width=True)
 
     # -------------------------------
-    # ✅ Summary
+    # ✅ Summary & Next Steps
     # -------------------------------
     st.markdown("---")
     st.markdown("## 📌 Summary & Next Steps")
