@@ -9,7 +9,6 @@ from helper_functions import (
     grammar_check_score,
     categorize_keywords,
     get_keyword_coverage,
-    generate_wordcloud_image,
     section_detection,
     top_n_words
 )
@@ -69,17 +68,13 @@ if uploaded_file and job_description:
     word_count = len(resume_text.split())
 
     # Keyword coverage for pie/chart
-    coverage_pct = get_keyword_coverage(clean_resume, clean_jd)  # 0-100
+    coverage_pct = get_keyword_coverage(clean_resume, clean_jd)
 
     # Categorize missing keywords
     categorized = categorize_keywords(missing_keywords)
 
     # Section detection
     sections_found = section_detection(resume_text)
-
-    # Top words for wordclouds
-    resume_top = top_n_words(clean_resume, n=80)
-    jd_top = top_n_words(clean_jd, n=80)
 
     # -------------------------------
     # 📊 Results Section (Professional layout)
@@ -169,7 +164,7 @@ if uploaded_file and job_description:
             st.info(f"• {tip}")
 
     # -------------------------------
-    # 📈 Visual Dashboard (charts & wordclouds)
+    # 📈 Visual Dashboard (charts only)
     # -------------------------------
     st.markdown("---")
     st.markdown("## 📈 Visual Insights")
@@ -178,7 +173,7 @@ if uploaded_file and job_description:
     fig1, ax1 = plt.subplots(figsize=(6, 3))
     scores = [match_score, format_score, grammar_score]
     labels = ["Match", "Formatting", "Grammar"]
-    bar_colors = ["#2b8cbe", "#7fc97f", "#fdae61"]  # professional tri-color
+    bar_colors = ["#2b8cbe", "#7fc97f", "#fdae61"]
     ax1.bar(labels, scores, color=bar_colors)
     ax1.set_ylim(0, 100)
     ax1.set_ylabel("Score (%)")
@@ -196,18 +191,6 @@ if uploaded_file and job_description:
     ax2.set_title("JD Keyword Coverage")
     st.pyplot(fig2)
 
-    # Wordclouds side-by-side (✅ fixed for deprecation)
-    wc_col1, wc_col2 = st.columns(2)
-    with wc_col1:
-        st.subheader("Resume — Top Words")
-        img_res = generate_wordcloud_image(resume_top)
-        st.image(img_res, use_container_width=True)
-
-    with wc_col2:
-        st.subheader("Job Description — Top Words")
-        img_jd = generate_wordcloud_image(jd_top)
-        st.image(img_jd, use_container_width=True)
-
     # -------------------------------
     # ✅ Summary
     # -------------------------------
@@ -219,5 +202,3 @@ if uploaded_file and job_description:
 
 else:
     st.info("👆 Please upload your resume and paste a job description to begin.")
-
-
