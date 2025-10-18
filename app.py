@@ -32,8 +32,7 @@ with st.sidebar:
         "and provides insights on keyword match, formatting, and readability.\n\n"
         
     )
-    st.markdown("---")
-    st.caption("Pro features (future): AI rewrite, course suggestions, personal dashboard")
+    
 
 # -------------------------------
 # 🏁 Title & Description
