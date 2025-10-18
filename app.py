@@ -119,7 +119,6 @@ if uploaded_file and job_description:
 
     tech = categorized.get("technical", [])
     soft = categorized.get("soft", [])
-    domain = categorized.get("domain", [])
 
     st.markdown("### 🔧 Technical Skills")
     if tech:
@@ -127,13 +126,13 @@ if uploaded_file and job_description:
     else:
         st.success("No major technical gaps detected.")
 
-      st.markdown("### 💬 Soft Skills")
+    st.markdown("### 💬 Soft Skills")
     if soft:
         st.write(", ".join(soft))
     else:
         st.success("Soft skills covered.")
 
-    # Remove Domain/Other Keywords section and add summary line
+    # Add single summary line instead of Domain/Other section
     st.markdown("🧩 No major domain-specific gaps detected.")
 
     # -------------------------------
@@ -183,7 +182,8 @@ if uploaded_file and job_description:
     fig2, ax2 = plt.subplots(figsize=(5, 3))
     cover = coverage_pct
     remaining = max(0, 100 - cover)
-    ax2.pie([cover, remaining], labels=[f"Covered {cover:.1f}%", f"Missing {remaining:.1f}%"],
+    ax2.pie([cover, remaining],
+            labels=[f"Covered {cover:.1f}%", f"Missing {remaining:.1f}%"],
             autopct='%1.1f%%', colors=["#2b8cbe", "#e0e0e0"])
     ax2.set_title("JD Keyword Coverage")
     st.pyplot(fig2)
